@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.spotapps">
+
+    <!-- Original -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:backupAgent=".backup.SpotAppsBackupAgent"
+        android:description="@string/app_description"
+        android:icon="@mipmap/spotapps_icon72"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light">
+
+        <!-- use android:logo for action bar icon which can be larger -->
+        <!-- use android:process to control what process your application runs in -->
+        <!-- android:requiredAccountType and restrictedAccountType  if your users have accounts -->
+        <!-- android:supportsRtl for hebrew like languages -->
+        <!-- android:taskAffinity helps when managing the back stack -->
+        <!-- <uses-feature> should be set for gps -->
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CreateNewMiniAppActivity"
+            android:label="@string/title_activity_create_new_mini_app"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".CreateNewSpotActivity"
+            android:label="@string/title_activity_create_new_spot"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewNearbySpotsActivity"
+            android:label="@string/title_activity_view_nearby_spots"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <provider
+            android:name=".data.SpotContentProvider"
+            android:authorities="spot.content"
+            android:enabled="true"
+            android:exported="true"></provider>
+    </application>
+
+</manifest>

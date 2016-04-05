@@ -1,0 +1,35 @@
+<resources>
+    <!-- manifest strings -->
+    <string name="app_name">SpotApps</string>
+    <string name="app_description">SpotApps is an application</string>
+    <string name="title_activity_splash">SpotApps</string>
+    <string name="title_activity_create_new_mini_app">CreateNewMiniAppActivity</string>
+    <string name="title_activity_create_new_spot">CreateNewSpotActivity</string>
+    <string name="title_activity_view_nearby_spots">ViewNearbySpotsActivity</string>
+
+    <!-- splash screen -->
+    <string name="splash_text">Checking where you are!</string>
+
+    <!-- default values that should not be presented: -->
+    <string name="spotapps_title">Undefined Spot Name</string>
+    <string name="web_link">Operation do something</string>
+
+    <string name="lbl_input_name">Name:</string>
+    <string name="lbl_input_spot_type">Type:</string>
+    <string name="lbl_input_mini_app_type">Type:</string>
+    <string name="lbl_input_icon">Icon:</string>
+    <string name="lbl_input_link">Link:</string>
+
+    <string name="btn_create_new_mini_app">Create New MiniApp</string>
+    <string name="btn_save_new_spot">Save New Spot</string>
+    <string name="btn_save_new_mini_app">Save New MiniApp</string>
+    <string name="btn_not_on_spot">I\'m not on this Spot!</string>
+    <string name="btn_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="loading">Loading...</string>
+    <string name="nearby_spots">Are you at these spots?</string>
+    <string name="no_nearby_spots_create">No spot here? Create one!</string>
+
+
+
+</resources>
