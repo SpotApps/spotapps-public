@@ -10,12 +10,21 @@ import java.util.List;
  */
 public class SpotBundleUtils {
     private static final String SPOT = "SPOT";
-    public static List<Spot> loadSpotsFromBundle(Bundle bundle){
-        return (List<Spot>)bundle.getSerializable(SPOT);
+    private static final String SINGLE_SPOT = "SINGLE_SPOT";
+
+    public static SpotBundle loadSpotsFromBundle(Bundle bundle){
+        return (SpotBundle)bundle.getSerializable(SPOT);
     }
 
-    public static void storeSpotsInBundle(Bundle bundle, List<Spot> spots){
-        bundle.putSerializable(SPOT, (Serializable)spots);
+    public static void storeSpotsInBundle(Bundle bundle, SpotBundle spots){
+        bundle.putSerializable(SPOT, spots);
     }
 
+
+//    public static Spot loadSingleSpotFromBundle(Bundle bundle){
+//        return (Spot)bundle.getSerializable(SINGLE_SPOT);
+//    }
+//    public static void storeSingleSpotInBundle(Bundle bundle, Spot spot) {
+//        bundle.putSerializable(SINGLE_SPOT, spot);
+//    }
 }

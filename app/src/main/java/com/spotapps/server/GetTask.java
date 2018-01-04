@@ -2,13 +2,6 @@ package com.spotapps.server;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,44 +30,47 @@ public class GetTask extends AsyncTask<String, String, String> {
         this.callback = callback;
     }
 
-    @Override
-    protected String doInBackground(String... params) {
-        String result = null;
-        HttpClient httpclient = new DefaultHttpClient();
-
-        // Prepare a request object
-        HttpGet httpget = new HttpGet(this.restUrl);
-
-        // Execute the request
-        HttpResponse response;
-        try {
-            response = httpclient.execute(httpget);
-            // Examine the response status
-            // log(response.getStatusLine().toString());
-
-            // Get hold of the response entity
-            HttpEntity entity = response.getEntity();
-            // If the response does not enclose an entity, there is no need
-            // to worry about connection release
-
-            if (entity != null) {
-
-                // A Simple JSON Response Read
-                InputStream instream = entity.getContent();
-                result= convertStreamToString(instream);
-                // now you have the string representation of the HTML request
-
-                instream.close();
-
-            }
-
-
-        } catch (Exception e) {}
-        return result;
-    }
+//    @Override
+//    protected String doInBackground(String... params) {
+//        String result = null;
+//
+//
+//
+//        HttpClient httpclient = new DefaultHttpClient();
+//
+//        // Prepare a request object
+//        HttpGet httpget = new HttpGet(this.restUrl);
+//
+//        // Execute the request
+//        HttpResponse response;
+//        try {
+//            response = httpclient.execute(httpget);
+//            // Examine the response status
+//            // log(response.getStatusLine().toString());
+//
+//            // Get hold of the response entity
+//            HttpEntity entity = response.getEntity();
+//            // If the response does not enclose an entity, there is no need
+//            // to worry about connection release
+//
+//            if (entity != null) {
+//
+//                // A Simple JSON Response Read
+//                InputStream instream = entity.getContent();
+//                result= convertStreamToString(instream);
+//                // now you have the string representation of the HTML request
+//
+//                instream.close();
+//
+//            }
+//
+//
+//        } catch (Exception e) {}
+//        return result;
+//    }
 
     // this uses HttpUrlConnection. HttpClient can also be used but google recommend the former because it is lightweight, simple and android tailored.
-    protected String doInBackgroundHowItShouldLook(String... params) {
+    protected String doInBackground(String... params) {
     // These two need to be declared outside the try/catch
     // so that they can be closed in the finally block.
     HttpURLConnection urlConnection = null;
@@ -87,7 +83,7 @@ public class GetTask extends AsyncTask<String, String, String> {
         // Construct the URL for the OpenWeatherMap query
         // Possible parameters are avaiable at OWM's forecast API page, at
         // http://openweathermap.org/API#forecast
-        URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
+        URL url = new URL(this.restUrl);
 
         // Create the request to OpenWeatherMap, and open the connection
         urlConnection = (HttpURLConnection) url.openConnection();
@@ -112,6 +108,12 @@ public class GetTask extends AsyncTask<String, String, String> {
         }
 
         if (buffer.length() == 0) {
+            // TODO check this
+            if (buffer.equals(line.charAt(0))) {
+                buffer.append(reader.toString());
+                buffer.append(";");
+            }
+            // TODO is it really necessary
             // Stream was empty.  No point in parsing.
             return null;
         }

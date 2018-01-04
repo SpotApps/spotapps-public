@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="customTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowTitleBackgroundStyle">@style/AppTheme</item>
+        <item name="android:actionBarStyle">@style/customTitleBarStyle</item>
+    </style>
+
+    <style name="customTitleBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/secondary_amber</item>
+    </style>
+</resources>

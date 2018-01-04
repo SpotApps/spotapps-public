@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dp"
+        android:layout_margin="2dp">
+
+        <ImageView
+            android:id="@+id/imageViewWebLinkIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingRight="10dp"
+            android:src="@drawable/web_link"
+            android:background="@color/primary_amber"/>
+
+        <TextView
+            android:id="@+id/textViewWebLinkName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageViewWebLinkIcon"
+            android:text="@string/web_link"
+            android:textSize="20dp"
+            android:background="@color/primary_amber" />
+
+        <TextView
+            android:id="@+id/textViewWebLinkDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewWebLinkName"
+            android:layout_toRightOf="@+id/imageViewWebLinkIcon"
+            android:text="Click to activate operation"
+            android:textSize="14dp"
+            android:background="@color/primary_amber"/>
+
+</RelativeLayout>

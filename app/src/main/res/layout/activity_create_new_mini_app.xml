@@ -1,12 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/primary_amber"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:showDividers="beginning|middle|end"
+    android:id="@+id/spotappsid"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/secondary_amber"
     tools:context="com.spotapps.CreateNewMiniAppActivity">
 
-    <TextView android:id="@+id/textView" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="SPOTAPPS" android:textAppearance="?android:attr/textAppearanceLarge"  android:background="@color/secondary_amber"/>
+    <!-- Title with instructions -->
+    <TextView android:id="@+id/createNewMiniAppTextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/create_new_mini_app_instructions" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_margin="5dp"/>
 
-</RelativeLayout>
+    <TextView android:id="@+id/NameLabelTextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/lbl_input_name" android:textAppearance="?android:attr/textAppearanceLarge"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
+    <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/editName" android:hint="Enter the name of the Mini App" android:singleLine="true" android:inputType="textCapWords"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
+
+    <TextView android:id="@+id/TypeLabelTextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/lbl_input_mini_app_type" android:textAppearance="?android:attr/textAppearanceLarge"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
+    <Spinner android:id="@+id/MiniAppTypeSpinner" android:layout_height="wrap_content" android:layout_width="match_parent" android:hint="Choose the type of the Mini App" android:textAppearance="?android:attr/textAppearanceLarge"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" />
+   <!-- <EditText android:layout_width="fill_parent" android:layout_height="50dp" android:id="@+id/editType" android:hint="Choose the type of the Mini App" android:singleLine="true" android:inputType="textCapWords"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/> -->
+
+    <TextView android:id="@+id/ParamLabelTextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/lbl_input_mini_app_param" android:textAppearance="?android:attr/textAppearanceLarge"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
+    <!--<EditText android:layout_width="fill_parent" android:layout_height="50dp" android:id="@+id/MiniAppParam" android:hint="Choose the value used by the Mini App" android:singleLine="true" android:inputType="textCapWords"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>-->
+
+    <FrameLayout android:id="@+id/MiniAppParamFragmentContainer" android:layout_width="fill_parent" android:layout_height="50dp"  android:hint="Choose the value used by the Mini App" android:singleLine="true" android:inputType="textCapWords"  android:background="@color/primary_amber" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
+
+    <Button android:id="@+id/btn_save_new_mini_app" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="@string/btn_save_new_mini_app" android:onClick="saveNewMiniApp" style="?android:attr/buttonStyleSmall"  android:background="@drawable/buttonshape" android:layout_margin="5dp"/>
+</LinearLayout>

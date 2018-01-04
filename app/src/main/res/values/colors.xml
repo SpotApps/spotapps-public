@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_amber">#9FA8DA</color>
-    <color name="accent_amber">#ffffff</color>
-    <color name="secondary_amber">#3F51B5</color>
+    <color name="primary_amber">#ffffff</color>
+    <color name="accent_amber">#7986CB</color>
+    <color name="secondary_amber">#C5CAE9</color>
+    <!-- color name="secondary_amber">#C5CAE9#7986CB</color> -->
 </resources>

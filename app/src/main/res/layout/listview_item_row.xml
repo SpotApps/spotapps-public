@@ -36,4 +36,31 @@
             android:textSize="14dp"
             android:background="@color/primary_amber"/>
 
+
+    <ImageButton
+        android:id="@+id/btn_thumbs_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_thumb_down_black_24dp"
+        android:minHeight="16dp"
+        android:minWidth="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/textViewWebLinkDescription"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <ImageButton
+        android:id="@+id/btn_thumbs_up"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_thumb_up_black_24dp"
+        android:minHeight="16dp"
+        android:minWidth="16dp"
+        android:layout_toLeftOf="@+id/btn_thumbs_down"
+        android:layout_above="@+id/textViewWebLinkDescription"
+        style="?android:attr/borderlessButtonStyle"/>
+
+
+
+
 </RelativeLayout>

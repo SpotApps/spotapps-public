@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string-array name="spot_types_array">
+    <item>Other</item>
+    <item>Restaurant</item>
+    <item>Private Home</item>
+    <item>Park</item>
+    <item>Sports Venue</item>
+    <item>Bank</item>
+    <item>University</item>
+    <item>Kindergarten</item>
+    <item>School</item>
+    <item>Shopping Center</item>
+    <item>Cinema</item>
+    <item>Supermarket</item>
+    <item>Library</item>
+</string-array></resources>

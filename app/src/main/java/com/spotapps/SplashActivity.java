@@ -10,32 +10,30 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import com.spotapps.beans.Spot;
+
+import com.spotapps.beans.SpotBundle;
 import com.spotapps.beans.SpotBundleUtils;
 import com.spotapps.beans.SpotFactory;
 import com.spotapps.beans.SpotKey;
-import com.spotapps.server.ServerFacade;
-import java.util.ArrayList;
-import java.util.List;
+import com.spotapps.beans.SpotLocation;
+import com.spotapps.sensors.SensorsFacade;
+import com.spotapps.server.GetSpotsTask;
+
 import java.util.concurrent.ExecutionException;
 
 /**
  * SplashActivity is the first activity in the application - it is responsible for opening a "loading..." splash screen.
  * Then in the background it loads the current spot and launches the relevant page in the app.
- * Members of the activity are those that remain last
+ * The entire lifetime of an activity happens between the first call to onCreate(Bundle)
+ * through to a single final call to onDestroy().
+ * An activity will do all setup of "global" state in onCreate(), and release all remaining resources in onDestroy().
+ * For example, if it has a thread running in the background to download data from the network,
+ * it may create that thread in onCreate() and then stop the thread in onDestroy().
+ * from https://developer.android.com/reference/android/app/Activity.html
  */
 public class SplashActivity extends Activity {
 
-//    private Spot loadedSpot;
-    private LoadSpotsTask aSyncTask;
-
-//    public synchronized void setLoadedSpot(Spot loadedSpot) {
-//        this.loadedSpot = loadedSpot;
-//    }
-//
-//    public synchronized Spot getLoadedSpot() {
-//        return loadedSpot;
-//    }
+    private GetSpotsTask aSyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,55 +61,59 @@ public class SplashActivity extends Activity {
                 public void onAnimationRepeat(Animation animation) {
                     if (hasLoadingEnded()) {
 
-                        Bundle bundle = new Bundle();
+//                        Bundle bundle = new Bundle();
 
-                        try {
-                            SpotBundleUtils.storeSpotsInBundle(bundle, loadSpotsForCurrentLocation());
-                        } catch (ExecutionException e) {
-                            logMessage(e);
-                            return; // TODO end application?
-                        } catch (InterruptedException e) {
-                            logMessage(e);
-                            return;// TODO end application?
-                        }
+//                        try {
+//                            SpotBundle spots = loadSpotsForCurrentLocation();
+//                            SpotBundleUtils.storeSpotsInBundle(bundle, spots);
+//                        } catch (ExecutionException|InterruptedException e) {
+//                            logMessage(e);
+//                            return; // TODO end application?
+//                        }
                         iv.startAnimation(anFade);
                         finish();
                         Intent i = new Intent(getBaseContext(), MainActivity.class);
-                        i.putExtras(bundle);
+//                        i.putExtras(bundle); // TODO TALYAC can this work without loading spots here?
                         startActivity(i);
+                        finish(); // this prevents the user from returning to the splash screen
                     }
                 }
             });
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        aSyncTask.cancel(true);
+    }
+
     private void logMessage(Exception e) {
         // TODO: 12/30/2015
-    }
-
-    private List<Spot> loadSpotsForCurrentLocation() throws ExecutionException, InterruptedException {
-
-        return aSyncTask.get();
-    }
-
-    public void setLoadingCounter(int loadingCounter) {
-//        this.loadingCounter = loadingCounter;
     }
 
 //    int loadingCounter = 0;
     //int maxLoaded = 5;
     private void startLoadingSpots() {
         // TODO: 12/30/2015 create key based on location data
-        SpotKey spotKey = SpotFactory.createSpotKey();
-        aSyncTask = new LoadSpotsTask();
-        aSyncTask.execute(spotKey);
+//        SpotLocation currentLocation = SensorsFacade.getNewLocation();
+//        SpotKey spotKey = SpotFactory.createSpotKey(currentLocation.getMinLat(), currentLocation.getMinLong());
+//        aSyncTask = new GetSpotsTask(this);
+//        aSyncTask.execute(spotKey);
+
     }
 
     private boolean hasLoadingEnded() {
         //return aSyncTask.getLoadedSpot() != null;
-        AsyncTask.Status status = aSyncTask.getStatus();
-        return AsyncTask.Status.FINISHED.equals(status);
+//        AsyncTask.Status status = aSyncTask.getStatus();
+//        return AsyncTask.Status.FINISHED.equals(status);
+        return true;
     }
+
+//    private SpotBundle loadSpotsForCurrentLocation() throws ExecutionException, InterruptedException {
+//
+//        return aSyncTask.get();
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,52 +135,5 @@ public class SplashActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    // TODO TALYAC this should use GetTask
-    private class LoadSpotsTask extends AsyncTask<SpotKey, Integer, List<Spot>> {
-        protected List<Spot> doInBackground(SpotKey... keys) {
-            Spot spot = ServerFacade.loadSpot();
-            List<Spot> result = new ArrayList<>();
-            // here we can call publishProgress() while loading the spots
-            result.add(spot);
-            simulate5SecondsWaitTime();
-            return result;
-        }
-
-        // TODO TALYAC an integer is returned to keep track of the progress. Is this the best way to do this?
-        protected void onProgressUpdate(Integer... progress) {
-            if (progress != null && progress.length > 0){
-                setLoadingCounter(progress[0]);
-            }
-        }
-
-        protected void onPostExecute(List<Spot> result) {
-//            if (result!= null && result.size() > 0){
-//                setLoadedSpot(result.get(0));
-//            }
-        }
-
-        private void simulate5SecondsWaitTime() {
-            int count = 5;
-            ///// load spots
-            for (int i = 0; i < count; i++) {
-                try {
-                    synchronized (this){
-                        wait(1000);
-                    }
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                publishProgress(i);
-                // TODO TALYAC result.add;
-                publishProgress((int) ((i / (float) count) * 100));
-                // Escape early if cancel() is called
-                if (isCancelled()) break;
-            }
-        }
-        //
-
     }
 }

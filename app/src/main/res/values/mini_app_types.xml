@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string-array name="mini_app_types_array">
+    <item>Open a web site</item>
+    <item>Open an application</item>
+    <item>Dial a phone number</item>
+</string-array></resources>

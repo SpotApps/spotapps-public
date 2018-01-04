@@ -75,4 +75,8 @@ public class LoadedSpotsDataSource {
         spot.setSpot_json(cursor.getString(1));
         return spot;
     }
+
+    private LoadedSpot doNothing(){
+        return null;
+    }
 }

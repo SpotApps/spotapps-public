@@ -1,8 +1,10 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="@android:style/Theme.Light.NoTitleBar">
-        <!-- Customize your theme here. -->
+    <!-- Base application theme. parent="@android:style/Theme.Light.NoTitleBar"? -->
+    <style name="AppTheme" >
+        <!-- Customize your theme here. Does the following change the title from white?-->
+        <item name="android:background">@color/secondary_amber</item>
     </style>
+
 
 </resources>
